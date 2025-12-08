@@ -9,14 +9,11 @@ proc links(path: string) =
 
   let formattedDate = replace(
     dateText,
-    """</a>
-         <
-         <table""",
-    """</a>
-         <table""")
+    """<div style="display: none;" class="collapsible-list">""",
+    """<div class="collapsible-list">""")
 
   echo path
   writeFile(path, formattedDate)
 
-for f in walkFiles("/home/gs/xe_manual/htmls/*.htm"):
+for f in walkFiles("/home/gs/xe_manual/topix/service/procedure/*.html"):
   links(f)
