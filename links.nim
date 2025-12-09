@@ -5,15 +5,15 @@ import os
 proc links(path: string) =
   let dateText = readFile(path)
 
-  # let datePattern = re""""\<body\>\n\<h4\>\<a href\=\"\/\"\>Home menu\<\/a\>\<\/h4\>""""
+  let datePattern = re"""graphic\\ODYSSEY\\([A-Z0-9]+)\\en_US\\large_img"""
 
-  let formattedDate = replace(
+  let formattedDate = replacef(
     dateText,
-    """<div style="display: none;" class="collapsible-list">""",
-    """<div class="collapsible-list">""")
+    datePattern,
+    "graphic\\ODYSSEY\\$1\\en_US\\large_img.jpg")
 
   echo path
   writeFile(path, formattedDate)
 
-for f in walkFiles("/home/gs/xe_manual/topix/service/procedure/*.html"):
+for f in walkFiles("/home/gs/xe_manual/topix/service/procedure/*"):
   links(f)
